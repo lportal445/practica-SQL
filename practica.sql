@@ -23,3 +23,7 @@ SELECT DISTINCT b.nombre from bandas b
 JOIN albumes a ON a.banda_id = b.id
 where a.lanzamiento<=1980;
 
+SELECT b.nombre, a.nombre FROM bandas b
+JOIN albumes a ON a.banda_id = b.id
+WHERE a.ranking >= 8
+ORDER BY a.ranking DESC;
