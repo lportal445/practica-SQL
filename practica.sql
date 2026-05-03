@@ -39,6 +39,28 @@ join conciertos_musicos cm on cm.concierto_id=c.id
 join bandas b on cm.banda_id=b.id
 where b.nombre='Dire Straits';
 
-select b.nombre from bandas b
+select distinct b.nombre from bandas b
 join albumes a on a.banda_id=b.id
 where a.duracion<40;
+--NIVEL3--
+SELECT b.nombre
+FROM bandas b
+WHERE NOT EXISTS (
+    SELECT 1 FROM albumes a
+    WHERE a.banda_id = b.id AND a.duracion <= 50
+);
+
+select c.nombre, a.nombre from canciones c
+join albumes a on c.album_id=a.id
+where a.lanzamiento>2000 order by a.nombre ASC, c.nombre DESC;
+
+select b.nombre from bandas b 
+where b.genero='Rock Alternativo' and b.cant_integrantes<5 
+and not exists(select 1 from canciones c where c.banda_id=b.id and c.duracion<4);
+
+select c.nombre, count(*) as cant_bandas 
+from conciertos c
+join conciertos_musicos cm on c.id=cm.concierto_id
+group by c.id
+order by cant_bandas Desc
+limit 1;
