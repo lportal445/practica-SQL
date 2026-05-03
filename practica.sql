@@ -23,7 +23,22 @@ SELECT DISTINCT b.nombre from bandas b
 JOIN albumes a ON a.banda_id = b.id
 where a.lanzamiento<=1980;
 
-SELECT b.nombre, a.nombre FROM bandas b
-JOIN albumes a ON a.banda_id = b.id
-WHERE a.ranking >= 8
-ORDER BY a.ranking DESC;
+select c.nombre,c.fecha from conciertos c
+where c.pais='Argentina'and c.fecha<=2010;
+
+select sum(c.duracion) from canciones c
+join bandas b on c.banda_id=b.id
+where b.nombre='Queen';
+
+select sum(a.duracion) from albumes a
+join bandas b on b.id=a.banda_id
+where b.nombre='The Rolling Stones';
+
+select c.nombre from conciertos c
+join conciertos_musicos cm on cm.concierto_id=c.id
+join bandas b on cm.banda_id=b.id
+where b.nombre='Dire Straits';
+
+select b.nombre from bandas b
+join albumes a on a.banda_id=b.id
+where a.duracion<40;
